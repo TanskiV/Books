@@ -65,20 +65,43 @@ public class BookServiceImpl implements BookService {
 		return bookDto;
 	}
 	
+
+
+	@Override
+	public AuthorDto deleteAuthor(String name) {
+		Author author = authorRepository.findById(name).orElseThrow();
+		AuthorDto authorDto = authorToAuthorDto(author);
+		return authorDto;
+	}
+
+
+	@Override
+	public BookDto findBookByAuthor(String authorName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BookDto findBookByPublisher(String publisherName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	private BookDto convertBooktoBookDto(Book book) {
 		
 		Set<AuthorDto> authorDtos = book.getAuthors().stream()
 				.map(a -> new AuthorDto(a.getName(), a.getBirthDate()))
 				.collect(Collectors.toSet());
 				
-
-		
 		return new BookDto(book.getIsbn(), book.getTitle(), authorDtos, book.getPublisher().getPublisherName());
 
 	}
 
-
-
+	private AuthorDto authorToAuthorDto(Author author) {
+		AuthorDto authorDto = new AuthorDto(author.getName(), author.getBirthDate());
+		return authorDto;
+	}
 
 
 }
