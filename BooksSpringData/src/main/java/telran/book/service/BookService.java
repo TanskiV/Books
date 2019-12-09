@@ -1,5 +1,7 @@
 package telran.book.service;
 
+import java.util.Set;
+
 import telran.book.dto.AuthorDto;
 import telran.book.dto.BookDto;
 
@@ -13,8 +15,8 @@ public interface BookService {
 	
 	AuthorDto deleteAuthor (String name);
 	
-	BookDto findBookByAuthor(String authorName);
+	Set<BookDto> findBooksByAuthor(String authorName);
 	
-	BookDto findBookByPublisher(String publisherName);
+	Set<BookDto> findBooksByPublisher(String publisherName);
 
 }

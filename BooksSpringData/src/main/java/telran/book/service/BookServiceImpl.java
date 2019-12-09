@@ -71,18 +71,19 @@ public class BookServiceImpl implements BookService {
 	public AuthorDto deleteAuthor(String name) {
 		Author author = authorRepository.findById(name).orElseThrow();
 		AuthorDto authorDto = authorToAuthorDto(author);
+		authorRepository.deleteById(name);
 		return authorDto;
 	}
 
 
 	@Override
-	public BookDto findBookByAuthor(String authorName) {
+	public Set<BookDto> findBooksByAuthor(String authorName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BookDto findBookByPublisher(String publisherName) {
+	public Set<BookDto> findBooksByPublisher(String publisherName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

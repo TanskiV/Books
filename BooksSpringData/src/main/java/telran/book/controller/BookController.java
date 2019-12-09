@@ -33,8 +33,8 @@ public class BookController {
 		return bookService.deleteBookByIsbn(isbn);
 	}
 	
-	@DeleteMapping("/book/author/{nameAuthor}")
-	public AuthorDto deleteAuthor(@RequestBody String authorName) {
+	@DeleteMapping("/book/author/{authorName}")
+	public AuthorDto deleteAuthor(@PathVariable String authorName) {
 		
 		return bookService.deleteAuthor(authorName);
 	}
