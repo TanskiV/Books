@@ -1,7 +1,6 @@
 package telran.book.service;
 
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -78,14 +77,18 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Set<BookDto> findBooksByAuthor(String authorName) {
-		// TODO Auto-generated method stub
-		return null;
+		Author author = authorRepository.findById(authorName).orElseThrow();
+		Set<Book> books = bookRepository.findBookByAuthors(author);
+		return books.stream().map(this::convertBooktoBookDto)
+				.collect(Collectors.toSet());
 	}
 
 	@Override
 	public Set<BookDto> findBooksByPublisher(String publisherName) {
-		// TODO Auto-generated method stub
-		return null;
+		Publisher publisher = publisherRepository.findById(publisherName).orElseThrow();
+		Set<Book> books = bookRepository.findBookByPublisher(publisher);
+		return books.stream().map(this::convertBooktoBookDto)
+				.collect(Collectors.toSet());
 	}
 
 

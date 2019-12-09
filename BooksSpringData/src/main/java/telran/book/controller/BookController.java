@@ -1,6 +1,8 @@
 package telran.book.controller;
 
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +39,16 @@ public class BookController {
 	public AuthorDto deleteAuthor(@PathVariable String authorName) {
 		
 		return bookService.deleteAuthor(authorName);
+	}
+	
+	@GetMapping("/books/author/{authorName}")
+	public Set<BookDto> findBooksByAuthor(@PathVariable String authorName) {
+		return bookService.findBooksByAuthor(authorName);
+	}
+	
+	@GetMapping("/books/publisher/{publisherName}")
+	public Set<BookDto> findBooksByPublisher(@PathVariable String publisherName) {
+		return bookService.findBooksByPublisher(publisherName);
 	}
 
 }
