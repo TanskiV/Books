@@ -79,6 +79,11 @@ public class BookServiceImpl implements BookService {
 	public Set<BookDto> findBooksByAuthor(String authorName) {
 		Author author = authorRepository.findById(authorName).orElseThrow();
 		Set<Book> books = bookRepository.findBookByAuthors(author);
+		bookRepository.deleteInBatch(books);
+		//TODO
+//		books.stream().map(b -> b.setAuthors()).collect(Collectors.toSet());
+		
+		books = bookRepository.findBookByAuthors(author);
 		return books.stream().map(this::convertBooktoBookDto)
 				.collect(Collectors.toSet());
 	}
